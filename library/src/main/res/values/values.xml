@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleLayout">
+        <attr name="title_titleText" format="string|reference" />
+        <attr name="title_titleIcon" format="reference" />
+        <attr name="title_leftIcon1" format="reference" />
+        <attr name="title_leftText1" format="string|reference" />
+        <attr name="title_leftIcon2" format="reference" />
+        <attr name="title_leftText2" format="string|reference" />
+        <attr name="title_leftIcon3" format="reference" />
+        <attr name="title_leftText3" format="string|reference" />
+        <attr name="title_rightIcon1" format="reference" />
+        <attr name="title_rightText1" format="string|reference" />
+        <attr name="title_rightIcon2" format="reference" />
+        <attr name="title_rightText2" format="string|reference" />
+        <attr name="title_rightIcon3" format="reference" />
+        <attr name="title_rightText3" format="string|reference" />
+    </declare-styleable>
+
+</resources>
