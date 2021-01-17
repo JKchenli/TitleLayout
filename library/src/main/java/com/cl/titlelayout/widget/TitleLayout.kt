@@ -1,15 +1,17 @@
 package com.cl.titlelayout.widget
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.annotation.Dimension
 import com.cl.titlelayout.R
 
 /**
@@ -53,20 +55,20 @@ class TitleLayout @JvmOverloads constructor(
     private var rightTextView3: TextView? = null
     private var rightIconView3: ImageView? = null
 
-    private val leftLayout: LinearLayout = LinearLayout(context).apply {
-        orientation = LinearLayout.HORIZONTAL
-        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
-        setBackgroundColor(Color.YELLOW)
-    }
-    private val rightLayout: LinearLayout = LinearLayout(context).apply {
-        orientation = LinearLayout.HORIZONTAL
-        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
-        setBackgroundColor(Color.RED)
-    }
-    private val titleLayout: FrameLayout = FrameLayout(context).apply {
-        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
-        setBackgroundColor(Color.GREEN)
-    }
+    /**
+     *
+     */
+    @ColorInt
+    private var titleTextColor: Int
+
+    @Dimension
+    private var titleTextSize: Float
+
+    @ColorInt
+    private var operationTextColor: Int
+
+    @Dimension
+    private var operationTextSize: Float
 
     init {
         val attr = context.obtainStyledAttributes(attrs, R.styleable.TitleLayout, 0, 0)
@@ -84,149 +86,157 @@ class TitleLayout @JvmOverloads constructor(
         rightText2 = attr.getString(R.styleable.TitleLayout_title_rightText2)
         rightIcon3 = attr.getDrawable(R.styleable.TitleLayout_title_rightIcon3)
         rightText3 = attr.getString(R.styleable.TitleLayout_title_rightText3)
-        addView(titleLayout)
-        addView(leftLayout)
-        addView(rightLayout)
-        addTitleView()
+        titleTextColor =
+            attr.getColor(
+                R.styleable.TitleLayout_title_titleTextColor,
+                TitleLayoutConfig.getTitleTextColor(context)
+            )
+        titleTextSize = attr.getDimension(
+            R.styleable.TitleLayout_title_titleTextSize,
+            TitleLayoutConfig.getTitleTextSize(context)
+        )
+        operationTextColor =
+            attr.getColor(
+                R.styleable.TitleLayout_title_operationTextColor,
+                TitleLayoutConfig.getOperationTextColor(context)
+            )
+        operationTextSize = attr.getDimension(
+            R.styleable.TitleLayout_title_operationTextSize,
+            TitleLayoutConfig.getOperationTextSize(context)
+        )
+        getTitleView()?.let { addView(it) }
         addLeftLayoutView()
         addRightLayoutView()
         attr.recycle()
     }
 
-    private fun addTitleView() {
-        if (titleText != null) {
-            addTitleTextView()
-        } else if (titleIcon != null) {
-            addTitleIconView()
-        }
-    }
-
-    private fun buildTextView(): TextView {
+    private fun buildTextView(text: String, isTitle: Boolean = false): TextView {
         return TextView(context).apply {
-            layoutParams = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-                50,
+            gravity = Gravity.CENTER
+            this.text = text
+            if (isTitle) {
+                setTextColor(titleTextColor)
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize)
+            } else {
+                setTextColor(operationTextColor)
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, operationTextSize)
+            }
+            layoutParams = LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
             )
         }
     }
 
-    private fun buildIconView(): ImageView {
+    private fun buildIconView(icon: Drawable): ImageView {
         return ImageView(context).apply {
-            layoutParams = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-                50,
+            setImageDrawable(icon)
+            scaleType = ImageView.ScaleType.CENTER_INSIDE
+            layoutParams = LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
             )
         }
+    }
+
+    private fun getTitleView(): View? {
+        if (titleText != null) {
+            titleTextView ?: run { titleTextView = buildTextView(titleText!!, true) }
+            return titleTextView
+        } else if (titleIcon != null) {
+            titleIconView ?: run { titleIconView = buildIconView(titleIcon!!) }
+            return titleIconView
+        }
+        return null
+    }
+
+    private fun getLeftView1(): View? {
+        if (leftIcon1 != null) {
+            leftIconView1 ?: run { leftIconView1 = buildIconView(leftIcon1!!) }
+            return leftIconView1
+        } else if (leftText1 != null) {
+            leftTextView1 ?: run { leftTextView1 = buildTextView(leftText1!!) }
+            return leftTextView1
+        }
+        return null
+    }
+
+    private fun getLeftView2(): View? {
+        if (leftIcon2 != null) {
+            leftIconView2 ?: run { leftIconView2 = buildIconView(leftIcon2!!) }
+            return leftIconView2
+        } else if (leftText2 != null) {
+            leftTextView2 ?: run { leftTextView2 = buildTextView(leftText2!!) }
+            return leftTextView2
+        }
+        return null
+    }
+
+    private fun getLeftView3(): View? {
+        if (leftIcon3 != null) {
+            leftIconView3 ?: run { leftIconView3 = buildIconView(leftIcon3!!) }
+            return leftIconView2
+        } else if (leftText3 != null) {
+            leftTextView3 ?: run { leftTextView3 = buildTextView(leftText3!!) }
+            return leftTextView3
+        }
+        return null
+    }
+
+    private fun getRightView1(): View? {
+        if (rightIcon1 != null) {
+            rightIconView1 ?: run { rightIconView1 = buildIconView(rightIcon1!!) }
+            return rightIconView1
+        } else if (rightText1 != null) {
+            rightTextView1 ?: run { rightTextView1 = buildTextView(rightText1!!) }
+            return rightTextView1
+        }
+        return null
+    }
+
+    private fun getRightView2(): View? {
+        if (rightIcon2 != null) {
+            rightIconView2 ?: run { rightIconView2 = buildIconView(rightIcon2!!) }
+            return rightIconView2
+        } else if (rightText2 != null) {
+            rightTextView2 ?: run { rightTextView2 = buildTextView(rightText2!!) }
+            return rightTextView2
+        }
+        return null
+    }
+
+    private fun getRightView3(): View? {
+        if (rightIcon3 != null) {
+            rightIconView3 ?: run { rightIconView3 = buildIconView(rightIcon3!!) }
+            return rightIconView3
+        } else if (rightText3 != null) {
+            rightTextView3 ?: run { rightTextView3 = buildTextView(rightText3!!) }
+            return rightTextView3
+        }
+        return null
     }
 
     private fun addLeftLayoutView() {
-        if (leftIcon1 != null) {
-            leftIconView1 = buildIconView().apply {
-                setImageDrawable(leftIcon1)
-            }
-            leftLayout.addView(leftIconView1)
-        } else if (leftText1 != null) {
-            leftTextView1 = buildTextView().apply {
-                text = leftText1
-            }
-            leftLayout.addView(leftTextView1)
-        }
-        if (leftIcon2 != null) {
-            leftIconView2 = buildIconView().apply {
-                setImageDrawable(leftIcon2)
-            }
-            leftLayout.addView(leftIconView2)
-        } else if (leftText2 != null) {
-            leftTextView2 = buildTextView().apply {
-                text = leftText2
-            }
-            leftLayout.addView(leftTextView2)
-        }
-        if (leftIcon3 != null) {
-            leftIconView3 = buildIconView().apply {
-                setImageDrawable(leftIcon3)
-            }
-            leftLayout.addView(leftIconView3)
-        } else if (leftText3 != null) {
-            leftTextView3 = buildTextView().apply {
-                text = leftText3
-            }
-            leftLayout.addView(leftTextView3)
-        }
+        getLeftView1()?.let { addView(it) }
+        getLeftView2()?.let { addView(it) }
+        getLeftView3()?.let { addView(it) }
     }
 
     private fun addRightLayoutView() {
-        if (rightIcon1 != null) {
-            rightIconView1 = buildIconView().apply {
-                setImageDrawable(rightIcon1)
-            }
-            rightLayout.addView(rightIconView1)
-        } else if (rightText1 != null) {
-            rightTextView1 = buildTextView().apply {
-                text = rightText1
-            }
-            rightLayout.addView(rightTextView1)
-        }
-        if (rightIcon2 != null) {
-            rightIconView2 = buildIconView().apply {
-                setImageDrawable(rightIcon2)
-            }
-            rightLayout.addView(rightIconView2)
-        } else if (rightText2 != null) {
-            rightTextView2 = buildTextView().apply {
-                text = rightText2
-            }
-            rightLayout.addView(rightTextView2)
-        }
-        if (rightIcon3 != null) {
-            rightIconView3 = buildIconView().apply {
-                setImageDrawable(rightIcon3)
-            }
-            rightLayout.addView(rightIconView3)
-        } else if (rightText3 != null) {
-            rightTextView3 = buildTextView().apply {
-                text = rightText3
-            }
-            rightLayout.addView(rightTextView3)
-        }
-    }
-
-    private fun addTitleIconView() {
-        titleIconView = ImageView(context).apply {
-            setImageDrawable(titleIcon)
-            layoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT
-            ).apply {
-                gravity = Gravity.CENTER
-            }
-        }
-        titleLayout.addView(titleIconView)
-    }
-
-    private fun addTitleTextView() {
-        titleTextView = TextView(context).apply {
-            text = titleText
-            gravity = Gravity.CENTER
-            layoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT
-            ).apply {
-                gravity = Gravity.CENTER
-            }
-        }
-        titleLayout.addView(titleTextView)
+        getRightView1()?.let { addView(it) }
+        getRightView2()?.let { addView(it) }
+        getRightView3()?.let { addView(it) }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
-        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
         val sizeWidth = MeasureSpec.getSize(widthMeasureSpec)
         val sizeHeight = MeasureSpec.getSize(heightMeasureSpec)
 
         measureChildren(widthMeasureSpec, heightMeasureSpec)
+
+        for (child in 0 until childCount) {
+            getChildAt(child).apply { minimumWidth = measuredHeight }
+        }
 
         setMeasuredDimension(sizeWidth, sizeHeight)
     }
@@ -236,18 +246,44 @@ class TitleLayout @JvmOverloads constructor(
     }
 
     override fun onLayout(change: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        titleLayout.layout(
-            (measuredWidth - titleLayout.measuredWidth) / 2,
-            0,
-            (measuredWidth + titleLayout.measuredWidth) / 2,
-            titleLayout.measuredHeight
+        //titleView位置
+        val titleView = getTitleView()
+        titleView?.layout(
+            (measuredWidth - titleView.measuredWidth) / 2, 0,
+            (measuredWidth + titleView.measuredWidth) / 2, titleView.measuredHeight
         )
-        rightLayout.layout(
-            measuredWidth - rightLayout.measuredWidth,
-            0,
-            measuredWidth,
-            rightLayout.measuredHeight
+        //leftView位置
+        val leftView1 = getLeftView1()
+        leftView1?.layout(
+            0, 0, leftView1.measuredWidth, leftView1.measuredHeight
         )
-        leftLayout.layout(0, 0, rightLayout.measuredWidth, rightLayout.measuredHeight)
+        val leftStart1 = leftView1?.measuredWidth ?: 0
+        val leftView2 = getLeftView2()
+        leftView2?.layout(
+            leftStart1, 0, leftStart1 + leftView2.measuredWidth, leftView2.measuredHeight
+        )
+
+        val leftStart2 = leftStart1 + (leftView2?.measuredWidth ?: 0)
+        val leftView3 = getLeftView3()
+        leftView3?.layout(
+            leftStart2, 0, leftStart2 + leftView3.measuredWidth, leftView3.measuredHeight
+        )
+        //rightView位置
+        val rightView1 = getRightView1()
+        rightView1?.layout(
+            measuredWidth - rightView1.measuredWidth, 0, measuredWidth, rightView1.measuredHeight
+        )
+        val rightEnd1 = measuredWidth - (rightView1?.measuredWidth ?: 0)
+        val rightView2 = getRightView2()
+        rightView2?.layout(
+            rightEnd1 - rightView2.measuredWidth, 0,
+            rightEnd1, rightView2.measuredHeight
+        )
+        val rightEnd2 = rightEnd1 - (rightView2?.measuredWidth ?: 0)
+        val rightView3 = getRightView3()
+        rightView3?.layout(
+            rightEnd2 - rightView3.measuredWidth, 0,
+            rightEnd2, rightView3.measuredHeight
+        )
     }
 }

@@ -13,6 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title_leftIcon1="@drawable/ic_launcher_background"
+        app:title_leftText1="测试"
+        app:title_rightIcon1="@android:drawable/ic_delete"
         app:title_titleText="测试" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,15 @@
         <attr name="title_rightText2" format="string|reference" />
         <attr name="title_rightIcon3" format="reference" />
         <attr name="title_rightText3" format="string|reference" />
+
+        <attr name="title_titleTextColor" format="color|reference" />
+        <attr name="title_titleTextSize" format="dimension" />
+        <attr name="title_operationTextColor" format="color|reference" />
+        <attr name="title_operationTextSize" format="dimension" />
     </declare-styleable>
 
+    <dimen name="defaultTitleTextSize">20sp</dimen>
+    <color name="defaultTitleTextColor">#000000</color>
+    <dimen name="defaultOperationTextSize">16sp</dimen>
+    <color name="defaultOperationTextColor">#000000</color>
 </resources>
