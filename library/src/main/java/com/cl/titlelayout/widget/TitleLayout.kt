@@ -1,6 +1,7 @@
 package com.cl.titlelayout.widget
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -139,7 +140,7 @@ class TitleLayout @JvmOverloads constructor(
         }
     }
 
-    private fun getTitleView(): View? {
+    fun getTitleView(): View? {
         if (titleText != null) {
             titleTextView ?: run { titleTextView = buildTextView(titleText!!, true) }
             return titleTextView
@@ -150,7 +151,7 @@ class TitleLayout @JvmOverloads constructor(
         return null
     }
 
-    private fun getLeftView1(): View? {
+    fun getLeftView1(): View? {
         if (leftIcon1 != null) {
             leftIconView1 ?: run { leftIconView1 = buildIconView(leftIcon1!!) }
             return leftIconView1
@@ -161,7 +162,7 @@ class TitleLayout @JvmOverloads constructor(
         return null
     }
 
-    private fun getLeftView2(): View? {
+    fun getLeftView2(): View? {
         if (leftIcon2 != null) {
             leftIconView2 ?: run { leftIconView2 = buildIconView(leftIcon2!!) }
             return leftIconView2
@@ -172,7 +173,7 @@ class TitleLayout @JvmOverloads constructor(
         return null
     }
 
-    private fun getLeftView3(): View? {
+    fun getLeftView3(): View? {
         if (leftIcon3 != null) {
             leftIconView3 ?: run { leftIconView3 = buildIconView(leftIcon3!!) }
             return leftIconView2
@@ -183,7 +184,7 @@ class TitleLayout @JvmOverloads constructor(
         return null
     }
 
-    private fun getRightView1(): View? {
+    fun getRightView1(): View? {
         if (rightIcon1 != null) {
             rightIconView1 ?: run { rightIconView1 = buildIconView(rightIcon1!!) }
             return rightIconView1
@@ -194,7 +195,7 @@ class TitleLayout @JvmOverloads constructor(
         return null
     }
 
-    private fun getRightView2(): View? {
+    fun getRightView2(): View? {
         if (rightIcon2 != null) {
             rightIconView2 ?: run { rightIconView2 = buildIconView(rightIcon2!!) }
             return rightIconView2
@@ -205,7 +206,7 @@ class TitleLayout @JvmOverloads constructor(
         return null
     }
 
-    private fun getRightView3(): View? {
+    fun getRightView3(): View? {
         if (rightIcon3 != null) {
             rightIconView3 ?: run { rightIconView3 = buildIconView(rightIcon3!!) }
             return rightIconView3

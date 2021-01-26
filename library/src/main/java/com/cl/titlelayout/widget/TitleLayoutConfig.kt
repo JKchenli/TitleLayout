@@ -33,14 +33,16 @@ object TitleLayoutConfig {
         return context.resources.getDimension(operationTextSize)
     }
 
-    fun initTitleConfig(titleTextColor: Int, titleTextSize: Int) {
+    fun initTitleConfig(titleTextColor: Int, titleTextSize: Int): TitleLayoutConfig {
         this.titleTextColor = titleTextColor
         this.titleTextSize = titleTextSize
+        return this
     }
 
-    fun initOperationConfig(operationTextColor: Int, operationTextSize: Int) {
+    fun initOperationConfig(operationTextColor: Int, operationTextSize: Int): TitleLayoutConfig {
         this.operationTextColor = operationTextColor
         this.operationTextSize = operationTextSize
+        return this
     }
 
 }
