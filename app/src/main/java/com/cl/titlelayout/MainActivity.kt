@@ -1,9 +1,11 @@
 package com.cl.titlelayout
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.cl.titlelayout.databinding.ActivityMainBinding
+import com.cl.titlelayout.widget.TitleLayoutConfig
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,21 +14,35 @@ class MainActivity : AppCompatActivity() {
         val bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         with(bind) {
-            button.setOnClickListener {
+            btSingleLeft.setOnClickListener {
                 val intent = Intent(this@MainActivity, SingleLeftActivity::class.java)
                 startActivity(intent)
             }
-            button2.setOnClickListener {
+            btSingleLeftRight.setOnClickListener {
                 val intent = Intent(this@MainActivity, SingleRightLeftActivity::class.java)
                 startActivity(intent)
             }
-            button3.setOnClickListener {
+            btMultipleRight.setOnClickListener {
                 val intent = Intent(this@MainActivity, MultipleRightActivity::class.java)
                 startActivity(intent)
             }
-            button4.setOnClickListener {
+            btLeftRightText.setOnClickListener {
                 val intent = Intent(this@MainActivity, RightLeftTextActivity::class.java)
                 startActivity(intent)
+            }
+            btConfigReduction.setOnClickListener {
+                TitleLayoutConfig.reductionConfig()
+            }
+            btConfigSave.setOnClickListener {
+                val titleSize = etTitleSize.text.toString().toInt()
+                val operationSize = etOperationSize.text.toString().toInt()
+                val color = if (rbBlack.isChecked) {
+                    Color.BLACK
+                } else {
+                    Color.RED
+                }
+                TitleLayoutConfig.initTitleConfig(color, titleSize)
+                TitleLayoutConfig.initOperationConfig(color, operationSize)
             }
         }
     }

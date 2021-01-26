@@ -90,7 +90,7 @@ class TitleLayout @JvmOverloads constructor(
         titleTextColor =
             attr.getColor(
                 R.styleable.TitleLayout_title_titleTextColor,
-                TitleLayoutConfig.getTitleTextColor(context)
+                TitleLayoutConfig.getTitleTextColor()
             )
         titleTextSize = attr.getDimension(
             R.styleable.TitleLayout_title_titleTextSize,
@@ -99,7 +99,7 @@ class TitleLayout @JvmOverloads constructor(
         operationTextColor =
             attr.getColor(
                 R.styleable.TitleLayout_title_operationTextColor,
-                TitleLayoutConfig.getOperationTextColor(context)
+                TitleLayoutConfig.getOperationTextColor()
             )
         operationTextSize = attr.getDimension(
             R.styleable.TitleLayout_title_operationTextSize,
