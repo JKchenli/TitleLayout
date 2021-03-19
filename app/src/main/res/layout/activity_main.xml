@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:hint="标题文字大小(sp 默认18)"
         android:inputType="phone"
+        android:text="18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_left_right_text" />
@@ -62,6 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="操作按钮文字大小(sp 默认14)"
+        android:text="14"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
