@@ -34,8 +34,12 @@ class MainActivity : AppCompatActivity() {
                 TitleLayoutConfig.reductionConfig()
             }
             btConfigSave.setOnClickListener {
-                val titleSize = etTitleSize.text.toString().toInt()
-                val operationSize = etOperationSize.text.toString().toInt()
+                val titleSize = 18
+                val operationSize = 14
+                try{
+                    titleSize = etTitleSize.text.toString().toInt()
+                    operationSize = etOperationSize.text.toString().toInt()
+                }catch(e : Exception){}
                 val color = if (rbBlack.isChecked) {
                     Color.BLACK
                 } else {
