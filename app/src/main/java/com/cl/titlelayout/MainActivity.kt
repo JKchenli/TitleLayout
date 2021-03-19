@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
                 TitleLayoutConfig.reductionConfig()
             }
             btConfigSave.setOnClickListener {
-                val titleSize = 18
-                val operationSize = 14
+                var titleSize = 18
+                var operationSize = 14
                 try{
                     titleSize = etTitleSize.text.toString().toInt()
                     operationSize = etOperationSize.text.toString().toInt()
