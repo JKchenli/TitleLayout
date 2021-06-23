@@ -15,7 +15,6 @@
         <attr name="title_rightText2" format="string|reference" />
         <attr name="title_rightIcon3" format="reference" />
         <attr name="title_rightText3" format="string|reference" />
-
         <attr name="title_titleTextColor" format="color|reference" />
         <attr name="title_titleTextSize" format="dimension" />
         <attr name="title_operationTextColor" format="color|reference" />

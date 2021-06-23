@@ -12,11 +12,11 @@ class RightLeftTextActivity : AppCompatActivity() {
         val bind = ActivityRightLeftTextBinding.inflate(layoutInflater)
         setContentView(bind.root)
         with(bind) {
-            tlTitle.getLeftView1()?.setOnClickListener {
+            tlTitle.leftView[1].getContent()?.setOnClickListener {
                 finish()
                 Toast.makeText(this@RightLeftTextActivity, "点击Left", Toast.LENGTH_SHORT).show()
             }
-            tlTitle.getRightView1()?.setOnClickListener {
+            tlTitle.rightView[1].getContent()?.setOnClickListener {
                 Toast.makeText(this@RightLeftTextActivity, "点击Right", Toast.LENGTH_SHORT).show()
             }
         }

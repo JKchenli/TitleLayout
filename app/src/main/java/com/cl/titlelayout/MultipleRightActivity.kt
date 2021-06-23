@@ -13,18 +13,18 @@ class MultipleRightActivity : AppCompatActivity() {
         val bind = ActivityMultipleRightBinding.inflate(layoutInflater)
         setContentView(bind.root)
         with(bind) {
-            tlTitle.getLeftView1()?.setOnClickListener {
+            tlTitle.leftView[1].getContent()?.setOnClickListener {
                 finish()
                 Toast.makeText(this@MultipleRightActivity, "点击Left", Toast.LENGTH_SHORT).show()
             }
-            tlTitle.getRightView1()?.apply {
+            tlTitle.rightView[1].getContent()?.apply {
                 setBackgroundColor(Color.YELLOW)//演示点击区域
                 setOnClickListener {
                     Toast.makeText(this@MultipleRightActivity, "点击Right1", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
-            tlTitle.getRightView2()?.apply {
+            tlTitle.rightView[2].getContent()?.apply {
                 setBackgroundColor(Color.RED)//演示点击区域
                 setOnClickListener {
                     Toast.makeText(this@MultipleRightActivity, "点击Right2", Toast.LENGTH_SHORT)
