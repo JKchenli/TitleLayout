@@ -44,7 +44,7 @@ class CellView constructor(
             iconView = null
         } ?: textView?.let {
             setTextViewData(it, text)
-        }
+        } ?: initTextView(text)
     }
 
     fun setIcon(icon: Drawable) {
@@ -54,7 +54,7 @@ class CellView constructor(
             textView = null
         } ?: iconView?.let {
             setIconViewData(it, icon)
-        }
+        } ?: initIconView(icon)
     }
 
     private fun resetView(view: View, otherView: View) {
