@@ -79,36 +79,22 @@ class TitleLayout @JvmOverloads constructor(
             R.styleable.TitleLayout_title_operationTextSize,
             TitleLayoutConfig.getOperationTextSize(context)
         )
-        titleView = CellView(context, titleIcon, titleText, titleTextColor, titleTextSize).apply {
-            getContent()?.let { addView(it) }
-        }
+        titleView = CellView(context, this, titleIcon, titleText, titleTextColor, titleTextSize)
         var left1 =
-            CellView(context, leftIcon1, leftText1, operationTextColor, operationTextSize).apply {
-                getContent()?.let { addView(it) }
-            }
+            CellView(context, this, leftIcon1, leftText1, operationTextColor, operationTextSize)
         var left2 =
-            CellView(context, leftIcon2, leftText2, operationTextColor, operationTextSize).apply {
-                getContent()?.let { addView(it) }
-            }
+            CellView(context, this, leftIcon2, leftText2, operationTextColor, operationTextSize)
         var left3 =
-            CellView(context, leftIcon3, leftText3, operationTextColor, operationTextSize).apply {
-                getContent()?.let { addView(it) }
-            }
+            CellView(context, this, leftIcon3, leftText3, operationTextColor, operationTextSize)
         leftView.put(1, left1)
         leftView.put(2, left2)
         leftView.put(3, left3)
         var right1 =
-            CellView(context, rightIcon1, rightText1, operationTextColor, operationTextSize).apply {
-                getContent()?.let { addView(it) }
-            }
+            CellView(context, this, rightIcon1, rightText1, operationTextColor, operationTextSize)
         var right2 =
-            CellView(context, rightIcon2, rightText2, operationTextColor, operationTextSize).apply {
-                getContent()?.let { addView(it) }
-            }
+            CellView(context, this, rightIcon2, rightText2, operationTextColor, operationTextSize)
         var right3 =
-            CellView(context, rightIcon3, rightText3, operationTextColor, operationTextSize).apply {
-                getContent()?.let { addView(it) }
-            }
+            CellView(context, this, rightIcon3, rightText3, operationTextColor, operationTextSize)
         rightView.put(1, right1)
         rightView.put(2, right2)
         rightView.put(3, right3)

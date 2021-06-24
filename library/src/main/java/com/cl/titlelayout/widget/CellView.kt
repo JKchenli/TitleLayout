@@ -17,6 +17,7 @@ import android.widget.TextView
  */
 class CellView constructor(
     private var context: Context,
+    private var parent: ViewGroup,
     cellIcon: Drawable? = null,
     cellText: String? = null,
     private var cellTextColor: Int,
@@ -28,8 +29,10 @@ class CellView constructor(
     init {
         cellText?.let {
             initTextView(it)
+            parent.addView(textView)
         } ?: cellIcon?.let {
             initIconView(it)
+            parent.addView(iconView)
         }
     }
 
@@ -44,7 +47,10 @@ class CellView constructor(
             iconView = null
         } ?: textView?.let {
             setTextViewData(it, text)
-        } ?: initTextView(text)
+        } ?: run {
+            initTextView(text)
+            parent.addView(textView)
+        }
     }
 
     fun setIcon(icon: Drawable) {
@@ -54,16 +60,14 @@ class CellView constructor(
             textView = null
         } ?: iconView?.let {
             setIconViewData(it, icon)
-        } ?: initIconView(icon)
+        } ?: run {
+            initIconView(icon)
+            parent.addView(iconView)
+        }
     }
 
     private fun resetView(view: View, otherView: View) {
-        if (view.parent is ViewGroup) {
-            (view.parent as ViewGroup).addView(
-                otherView,
-                (view.parent as ViewGroup).indexOfChild(view)
-            )
-        }
+        parent.addView(otherView, parent.indexOfChild(view))
     }
 
     private fun initTextView(text: String) {
