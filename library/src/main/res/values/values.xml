@@ -17,8 +17,18 @@
         <attr name="title_rightText3" format="string|reference" />
         <attr name="title_titleTextColor" format="color|reference" />
         <attr name="title_titleTextSize" format="dimension" />
+        <attr name="title_titleTextStyle" format="flags">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
         <attr name="title_operationTextColor" format="color|reference" />
         <attr name="title_operationTextSize" format="dimension" />
+        <attr name="title_operationTextStyle" format="flags">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
     </declare-styleable>
 
 </resources>

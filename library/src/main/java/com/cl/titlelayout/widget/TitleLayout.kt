@@ -1,17 +1,9 @@
 package com.cl.titlelayout.widget
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.SparseArray
-import android.util.TypedValue
-import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import com.cl.titlelayout.R
@@ -39,11 +31,15 @@ class TitleLayout @JvmOverloads constructor(
     @Dimension
     private var titleTextSize: Float
 
+    private var titleTextStyle: Int
+
     @ColorInt
     private var operationTextColor: Int
 
     @Dimension
     private var operationTextSize: Float
+
+    private var operationTextStyle: Int
 
     init {
         val attr = context.obtainStyledAttributes(attrs, R.styleable.TitleLayout, 0, 0)
@@ -70,6 +66,10 @@ class TitleLayout @JvmOverloads constructor(
             R.styleable.TitleLayout_title_titleTextSize,
             TitleLayoutConfig.getTitleTextSize(context)
         )
+        titleTextStyle = attr.getInt(
+            R.styleable.TitleLayout_title_titleTextStyle,
+            TitleLayoutConfig.getTitleTextStyle()
+        )
         operationTextColor =
             attr.getColor(
                 R.styleable.TitleLayout_title_operationTextColor,
@@ -79,22 +79,82 @@ class TitleLayout @JvmOverloads constructor(
             R.styleable.TitleLayout_title_operationTextSize,
             TitleLayoutConfig.getOperationTextSize(context)
         )
-        titleView = CellView(context, this, titleIcon, titleText, titleTextColor, titleTextSize)
+        operationTextStyle = attr.getInt(
+            R.styleable.TitleLayout_title_operationTextStyle,
+            TitleLayoutConfig.getOperationTextStyle()
+        )
+        titleView = CellView(
+            context,
+            this,
+            titleIcon,
+            titleText,
+            titleTextColor,
+            titleTextSize,
+            titleTextStyle
+        )
         var left1 =
-            CellView(context, this, leftIcon1, leftText1, operationTextColor, operationTextSize)
+            CellView(
+                context,
+                this,
+                leftIcon1,
+                leftText1,
+                operationTextColor,
+                operationTextSize,
+                operationTextStyle
+            )
         var left2 =
-            CellView(context, this, leftIcon2, leftText2, operationTextColor, operationTextSize)
+            CellView(
+                context,
+                this,
+                leftIcon2,
+                leftText2,
+                operationTextColor,
+                operationTextSize,
+                operationTextStyle
+            )
         var left3 =
-            CellView(context, this, leftIcon3, leftText3, operationTextColor, operationTextSize)
+            CellView(
+                context,
+                this,
+                leftIcon3,
+                leftText3,
+                operationTextColor,
+                operationTextSize,
+                operationTextStyle
+            )
         leftView.put(1, left1)
         leftView.put(2, left2)
         leftView.put(3, left3)
         var right1 =
-            CellView(context, this, rightIcon1, rightText1, operationTextColor, operationTextSize)
+            CellView(
+                context,
+                this,
+                rightIcon1,
+                rightText1,
+                operationTextColor,
+                operationTextSize,
+                operationTextStyle
+            )
         var right2 =
-            CellView(context, this, rightIcon2, rightText2, operationTextColor, operationTextSize)
+            CellView(
+                context,
+                this,
+                rightIcon2,
+                rightText2,
+                operationTextColor,
+                operationTextSize,
+                operationTextStyle
+            )
         var right3 =
-            CellView(context, this, rightIcon3, rightText3, operationTextColor, operationTextSize)
+            CellView(
+                context,
+                this,
+                rightIcon3,
+                rightText3,
+                operationTextColor,
+                operationTextSize,
+                operationTextStyle
+            )
         rightView.put(1, right1)
         rightView.put(2, right2)
         rightView.put(3, right3)

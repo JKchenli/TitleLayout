@@ -2,6 +2,7 @@ package com.cl.titlelayout
 
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.cl.titlelayout.databinding.ActivityMainBinding
@@ -36,17 +37,27 @@ class MainActivity : AppCompatActivity() {
             btConfigSave.setOnClickListener {
                 var titleSize = 18
                 var operationSize = 14
-                try{
+                try {
                     titleSize = etTitleSize.text.toString().toInt()
                     operationSize = etOperationSize.text.toString().toInt()
-                }catch(e : Exception){}
+                } catch (e: Exception) {
+                }
                 val color = if (rbBlack.isChecked) {
                     Color.BLACK
                 } else {
                     Color.RED
                 }
-                TitleLayoutConfig.initTitleConfig(color, titleSize)
-                TitleLayoutConfig.initOperationConfig(color, operationSize)
+                val style = if (rbNormal.isChecked) {
+                    Typeface.NORMAL
+                } else if (rbBold.isChecked) {
+                    Typeface.BOLD
+                } else if (rbItalic.isChecked) {
+                    Typeface.ITALIC
+                } else {
+                    Typeface.BOLD_ITALIC
+                }
+                TitleLayoutConfig.initTitleConfig(color, titleSize, style)
+                TitleLayoutConfig.initOperationConfig(color, operationSize, style)
             }
         }
     }

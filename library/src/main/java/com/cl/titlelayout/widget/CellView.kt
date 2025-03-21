@@ -1,6 +1,7 @@
 package com.cl.titlelayout.widget
 
 import android.content.Context
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.Gravity
@@ -15,13 +16,14 @@ import android.widget.TextView
  * @Date 2021/6/20
  * @Description
  */
-class CellView constructor(
+class CellView(
     private var context: Context,
     private var parent: ViewGroup,
     cellIcon: Drawable? = null,
     cellText: String? = null,
     private var cellTextColor: Int,
-    private var cellTextSize: Float
+    private var cellTextSize: Float,
+    private var cellTextStyle: Int
 ) {
     private var textView: TextView? = null
     private var iconView: ImageView? = null
@@ -96,25 +98,26 @@ class CellView constructor(
 
     private fun setIconViewData(imageView: ImageView, icon: Drawable) {
         imageView.apply {
-            setImageDrawable(icon)
-            scaleType = ImageView.ScaleType.CENTER_INSIDE
             layoutParams = ViewGroup.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
             )
+            setImageDrawable(icon)
+            scaleType = ImageView.ScaleType.CENTER_INSIDE
         }
     }
 
     private fun setTextViewData(textView: TextView, text: String) {
         textView.apply {
-            gravity = Gravity.CENTER
-            this.text = text
-            setTextColor(cellTextColor)
-            setTextSize(TypedValue.COMPLEX_UNIT_PX, cellTextSize)
             layoutParams = ViewGroup.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
             )
+            gravity = Gravity.CENTER
+            this.text = text
+            setTextColor(cellTextColor)
+            typeface = Typeface.create(Typeface.DEFAULT, cellTextStyle)
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, cellTextSize)
         }
     }
 
